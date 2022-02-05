@@ -176,14 +176,52 @@ export default {
             // set > type format
             res.type = this.type == 'car' ? 'car' : 'apartment'
 
+            // validate > form
+            let validator = true
+
+            if( res.type == 'car' ) {
+
+                // general data
+                if( res.type == '' ) validator = false
+                if( res.city == '' ) validator = false
+                if( res.address == '' ) validator = false
+                if( res.phone == '' ) validator = false
+                if( res.price == '' ) validator = false
+
+                // reference data
+                if( res.model == '' ) validator = false
+                if( res.car_type == '' ) validator = false
+                if( res.engine_volume == '' ) validator = false
+                if( res.engine_power == '' ) validator = false
+
+            }
+
+            if( res.type == 'apartment' ) {
+
+                // general data
+                if( res.type == '' ) validator = false
+                if( res.city == '' ) validator = false
+                if( res.address == '' ) validator = false
+                if( res.phone == '' ) validator = false
+                if( res.price == '' ) validator = false
+
+                // reference data
+                if( res.rooms == '' ) validator = false
+                if( res.square == '' ) validator = false
+
+            }
+
 
             this.$store.commit('save', res)     // save > to Store
-            await axios.post('https://demo-api.vsdev.space/api/brom/sales', res)
-
-            // fetch > ads
-            this.getAds().then(() => {
-                this.sort()
-            })
+            if( validator ) {
+                await axios.post('https://demo-api.vsdev.space/api/brom/sales', res)
+                // fetch > ads
+                this.getAds().then(() => {
+                    this.sort()
+                })
+            } else {
+                console.log('invalid data');
+            }
 
         }
     },
