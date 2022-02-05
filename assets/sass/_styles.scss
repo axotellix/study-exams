@@ -122,7 +122,7 @@ a {
 .CTA {
     max-width: max-content !important;
     padding: 17px 20px;
-    color: $white;
+    color: $white !important;
     font-size: 1.8rem;
     border-radius: 4px;
     background: $purple;
@@ -144,6 +144,7 @@ a {
 .CTA-small {
     @extend .CTA;
     padding: 10px 15px;
+    color: $white;
 }
 
 // badges
@@ -180,7 +181,84 @@ a {
 // [ MAIN ]
 main {
     width: 100%; height: auto; min-height: 100vh;
+    @include flex-align;
 }
+
+main .header {
+    width: 100%; height: 50px;
+    background: $white;
+    gap: 20px;
+    padding: 0 50px;
+    font-size: 1.7rem;
+    margin-bottom: 50px;
+    @include flex-align(flex-start, center);
+
+    .right-side {
+        text-align: center;
+        flex-grow: 1;
+    }
+}
+// [ section: container ]
+.container {
+    height: calc(100vh - 50px);
+    min-height: 500px;
+    @include flex-align(flex-start, flex-start);
+}
+ // sidebar
+.container .sidebar {
+    width: $sidebar; min-height: 100%;
+    padding: 0 20px;
+    @include flex-align(flex-start, flex-start, column);
+}
+ // content
+.container .content {
+    padding: 0 50px;
+    padding-bottom: 100px;
+    width: calc(95% - #{$sidebar}); min-height: 100%;
+}
+
+
+// [ section: sidebar ]
+.container .sidebar .nav {
+    width: 100%;
+}
+.container .sidebar .nav ul {
+    width: 100%;
+    gap: 20px;
+    @include flex-align(flex-start, flex-start, column);
+
+    .navlink {
+        @extend .CTA;
+        min-width: 100% !important;
+        color: $white !important;
+
+        a {
+            color: $white !important; 
+        }
+    }
+}
+
+.container .sidebar .widget {
+    width: 100%; padding: 20px;
+    margin-top: 50px;
+    background: $white;
+    border-radius: 7px;
+    box-shadow: 0 2px 10px 0 rgba(0, 5, 10, 0.05);
+}
+.container .sidebar .widget p {
+    font-size: 1.3rem;
+
+    span {
+        margin-right: 6px;
+    }
+}
+
+
+
+
+
+
+// -----------------------------------------------
 
 svg.ico {
     width: 22px; height: 22px; 
@@ -203,6 +281,7 @@ iframe .share-button, iframe .share-label {
     gap: 20px;
     @include flex-align;
 }
+
 
 
 

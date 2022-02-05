@@ -10,11 +10,11 @@ const api = {
 
         // [ GET requests ]
         GET: {
-            widget:     ctx => "/api/brom/left_widget/",
-            homepage:   ctx => "/api/brom/home_page/",
-            aboutpage:  ctx => "/api/brom/about_page/",
-            ads:        ctx => "/api/brom/sales/",
-            form:       ctx => " /api/brom/sales/form/",
+            widget:     ctx => "/api/brom/left_widget",
+            homepage:   ctx => "/api/brom/home_page",
+            aboutpage:  ctx => "/api/brom/about_page",
+            ads:        ctx => "/api/brom/sales",
+            form:       ctx => " /api/brom/sales/form",
         },
 
         // [ POST requests ]
@@ -55,8 +55,8 @@ const api = {
         let config = this.config
 
         // send > request
-        let req = await fetch(endpoint, config)
-        return req
+        let req = await axios.get(endpoint, { config })
+        return req.data
 
     },
 

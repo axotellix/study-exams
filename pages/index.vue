@@ -1,23 +1,25 @@
 
 <!-- [ PAGE: HOME ] -->
 <template>
-<main class = 'home'>
+<main class = 'homepage'>
 
     <!-- [ section: header ] -->
-    <section class="header">
-        <div class="left-side">Brom</div>
-        <div class="right-side">Доска объявлений</div>
-    </section>
+    <Header />
 
-    <!-- [ section: sidebar ] -->
-    <section class="sidebar">
-        <div class="nav">navbar</div>
-        <div class="widget">widget</div>
-    </section>
+    <!-- [ section: container ] -->
+    <section class="container">
 
-    <!-- [ section: content ] -->
-    <section class="content">
-        <h2>Content</h2>
+        <!-- sidebar -->
+        <Sidebar :widget="widget" />
+
+        <!-- content -->
+        <div class="content">
+            <ul>
+                <li class = 'img'><img :src="content.image" alt="homepage cover"></li>
+                <li class = 'text' v-html="content.text"></li>
+            </ul>
+        </div>
+
     </section>
 
 </main>
@@ -29,9 +31,13 @@
 // [ System ]
 import api from '../api/api.js'
 
-// [ Components ]
-// import Article from '@/components/Article'
+// [ Components: Partials ]
+import Header from '@/components/Header'
+import Sidebar from '@/components/Sidebar'
+
+// [ Components: Other ]
 import Ico from '@/components/Ico'
+
 
 export default {
     // [ Component name ]
@@ -39,7 +45,11 @@ export default {
 
     // [ Child components ]
     components: {
-        // Article,
+        // partials
+        Header,
+        Sidebar,
+
+        // other
         Ico
     },
 
@@ -60,17 +70,20 @@ export default {
     // [ Components props ]
     data() {
         return {
-            articles: [1, 2, 3, 4],
-            src_query: ''
+            content: {
+                image: 'https:/demo-api.vsdev.space/storage/brom/home_page_img.jpg',
+                text: 'some'
+            },
+            widget: {}
         }
     },
 
     // [ Hooks ] 
     async mounted() {
 
-        // fetch > articles
-        this.articles = await api.get('homepage')
-        this.$store.commit('func', this.articles)
+        // fetch > homepage content
+        this.content = await api.get('homepage')
+        this.widget = await api.get('widget')
 
     }
 }
