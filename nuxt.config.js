@@ -3,7 +3,7 @@ export default {
   target: 'static',
   title: 'web-exam-2022',
     htmlAttrs: {
-      lang: 'en'
+      lang: 'ru'
   },
 
   // Global page headers: https://go.nuxtjs.dev/config-head

@@ -5,29 +5,34 @@ import axios from 'axios'
 
 // [ MAIN ]
 const api = {
-    server: 'https://web-nuxt-api-axotellix.vercel.app',
+    server: 'https://demo-api.vsdev.space',
     routes: {
 
         // [ GET requests ]
         GET: {
-            dynamic: {
-                article_id: 1,
-            },
-
-            articles: ctx => "/api/articles/",
-            article:  ctx => "/api/articles/" + ctx?.routes?.GET?.dynamic?.article_id,
-            comments: ctx => `/api/articles/${ctx?.routes?.GET?.dynamic?.article_id}/comments/`,
+            widget:     ctx => "/api/brom/left_widget/",
+            homepage:   ctx => "/api/brom/home_page/",
+            aboutpage:  ctx => "/api/brom/about_page/",
+            ads:        ctx => "/api/brom/sales/",
+            form:       ctx => " /api/brom/sales/form/",
         },
 
         // [ POST requests ]
         POST: {
             dynamic: {
-                article_id: 1,
-                name: 'username',
-                comment: 'comment',
+                ad_type: 1,
+                city: '',
+                comment: '',
+                address: '',
+                phone: '',
             },
 
-            comments: ctx => `/api/articles/${ctx?.routes?.POST?.dynamic?.article_id}/comments?name=${ctx?.routes?.POST?.dynamic.name}&comment=${ctx?.routes?.POST?.dynamic.comment}`
+            ads: ctx => `/api/brom/sales/
+                ?type=${ctx?.routes?.POST?.dynamic.name}
+                &city=${ctx?.routes?.POST?.dynamic.city}
+                &address=${ctx?.routes?.POST?.dynamic.address}
+                &phone=${ctx?.routes?.POST?.dynamic.phone}
+            `
         }
 
     },
@@ -50,8 +55,8 @@ const api = {
         let config = this.config
 
         // send > request
-        let req = await axios.get(endpoint, { config })
-        return req.data.data
+        let req = await fetch(endpoint, config)
+        return req
 
     },
 

@@ -3,10 +3,22 @@
 <template>
 <main class = 'home'>
 
-    <!-- article -->
-    <ul class = 'articles'>
-        <li v-for="article in articles" :key="article.id">{{ article.title }}</li>
-    </ul>
+    <!-- [ section: header ] -->
+    <section class="header">
+        <div class="left-side">Brom</div>
+        <div class="right-side">Доска объявлений</div>
+    </section>
+
+    <!-- [ section: sidebar ] -->
+    <section class="sidebar">
+        <div class="nav">navbar</div>
+        <div class="widget">widget</div>
+    </section>
+
+    <!-- [ section: content ] -->
+    <section class="content">
+        <h2>Content</h2>
+    </section>
 
 </main>
 </template>
@@ -40,7 +52,7 @@ export default {
     head() {
         return {
             link: [
-                { rel: "stylesheet", href: "/css/app.css" } 
+                { rel: "stylesheet", href: "/css/app.css" } //TODO: add fonts
             ]
         }
     },
@@ -57,8 +69,8 @@ export default {
     async mounted() {
 
         // fetch > articles
-        this.articles = await api.get('articles')
-        this.$store.commit('keep_local', this.articles)
+        this.articles = await api.get('homepage')
+        this.$store.commit('func', this.articles)
 
     }
 }
