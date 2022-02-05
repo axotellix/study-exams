@@ -17,3 +17,32 @@
         opacity: 0.8;
     }
 }
+
+.card-type {
+    width: 100%;
+    gap: 10px;
+    font-size: 1.6rem;
+    @include flex-align;
+}
+
+.card-data {
+    margin-top: 20px;
+    @include flex-align(center, flex-start, column);
+}
+.ad-card p {
+    font-weight: $f-bold;
+    font-size: 1.5rem;
+    margin-top: 5px;
+    margin-bottom: 0;
+
+    span {
+        font-weight: $f-normal;
+    }
+}
+
+.car {
+    background: lighten($grey, 50%) !important;
+}
+.apartment {
+    background: darken($d-white, 5%) !important;
+}

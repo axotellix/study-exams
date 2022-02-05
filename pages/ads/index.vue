@@ -14,34 +14,39 @@
 
         <!-- content -->
         <div class="content">
-            <button class = 'CTA' @click="toggleForm">форма</button>
+            <button class = 'CTA center' @click="toggleForm">форма</button>
             <!-- form: add -->
             <form v-if="form_open" action="" ref="form" method = 'POST' @submit="sendForm">
-                <select name="type" v-model="type">
+                <select name="type" v-model="type" required>
                     <option value="car" selected>Машины</option>
                     <option value="apt">Квартиры</option>
                 </select>
+                <!-- general fields -->
                 <div v-for="(field, t) in form.fields" :key="field.title" >
                     <input v-if="field.type=='string'"
                         autocomplete="off"
                         :type="field.type" 
                         :placeholder="field.title" 
                         :name="t"
+                        v-model="form_data[t]"
+                        required
                     >
-                    <select v-else-if="t !== 'type'" :name="t">
-                        <option value="" selected disabled hidden>{{ field.title }}</option>
+                    <select v-else-if="t !== 'type'" :name="t" v-model="form_data[t]" required>
+                        <option :value="field.title" selected disabled>{{ field.title }}</option>
                         <option v-for="opt in field.values" :key="opt" :value="opt">{{ opt }}</option>
                     </select>
                 </div>
                 <div v-if="type=='car'">
-                    <div v-for="(field, t) in form.reference_fields['type.car']" :key="field.title" >
+                    <div v-for="(field, t) in form.reference_fields['type.car']" :key="field.title">
                         <input v-if="field.type=='string'"
                             autocomplete="off"
                             :type="field.type" 
                             :placeholder="field.title" 
                             :name="t"
+                            v-model="form_data[t]"
+                            required
                         >
-                        <select v-else :name="t">
+                        <select v-else :name="t" v-model="form_data[t]" required>
                             <option value="" selected disabled hidden>{{ field.title }}</option>
                             <option v-for="opt in field.values" :key="opt" :value="opt">{{ opt }}</option>
                         </select>
@@ -54,8 +59,10 @@
                             :type="field.type" 
                             :placeholder="field.title" 
                             :name="t"
+                            v-model="form_data[t]"
+                            required
                         >
-                        <select v-else :name="t">
+                        <select v-else :name="t" v-model="form_data[t]" required>
                             <option value="" selected disabled hidden>{{ field.title }}</option>
                             <option v-for="opt in field.values" :key="opt" :value="opt">{{ opt }}</option>
                         </select>
@@ -68,12 +75,23 @@
 
             <!-- ads list -->
             <ul class = 'ads-list'>
+                <div @click="sort( true )" class="comments-sort">
+                    <div >
+                        <span>Sort by date:</span>
+                        <Ico type = 'arrow-sort-up' :params="this.sort_by_date" />
+                    </div>
+                </div>
                 <li v-for="ad in ads" :key="ad.id" class = 'ad-card' :class="ad.type">
-                    <p>{{ ad.type }}</p>
-                    <p>{{ ad.city }}</p>
-                    <p>{{ ad.address }}</p>
-                    <p>{{ ad.phone }}</p>
-                    <p>{{ ad.price }}</p>
+                    <div class = 'card-type'>
+                        <Ico :type="ad.type" />
+                        {{ ad.type == 'car' ? 'Машины' : 'Квартиры' }}
+                    </div>
+                    <div class = 'card-data'>
+                        <p>город: <span>{{ ad.city }}</span></p>
+                        <p>адрес: <span>{{ ad.address }}</span></p>
+                        <p>тел.: <span>{{ ad.phone }}</span></p>
+                        <p>цена: <span>{{ ad.price }}</span></p>
+                    </div>
                 </li>
             </ul>
         </div>
@@ -114,7 +132,9 @@ export default {
 
     // [ Whatchers ]
     watch: { 
-
+        type: function() {
+            this.form_data = {}
+        }
     },
 
     // [ Head tags ]
@@ -131,45 +151,39 @@ export default {
         toggleForm() {
             this.form_open = !this.form_open
         },
+        async getAds() {
+            this.ads = await api.get('ads')
+            return new Promise(resolve => { resolve() })
+        },
+        sort( change_order = false ) {
+
+            // change > order
+            if(change_order) this.sort_by_date = !this.sort_by_date
+            let order = this.sort_by_date || false
+
+            // sort > comments
+            this.ads.sort(( c1, c2 ) => ((order + order % 2) - 1) * (c1.id - c2.id))
+
+        },
         async sendForm( e ) {
+            // prevent > default behaviour
             e.preventDefault();
-            let data = this.$refs.form
+
+            // save > data to result object
             let res = {}
-            let res_car = {
-                // general
-                type: '',
-                city: '',
-                address: '11',
-                phone: '',
-                // car
-                model: '',
-                car_type: '',
-                engine_volume: '',
-                engine_power: '',
-            }
-            let res_apt = {
-                // general
-                type: '',
-                city: '',
-                address: '11',
-                phone: '',
-                // apartments
-                rooms: '',
-                square: ''
-            }
-            if(this.$refs.form.type.value == 'car') {
-                Object.keys(data).forEach(f => {
-                    res_car[data[f].name] = data[f].value
-                    res = res_car
-                })
-            } else if (this.$refs.form.type.value = 'apartment') {
-                Object.keys(data).forEach(f => {
-                    res_apt[data[f].name] = data[f].value
-                    res = res_apt
-                })
-            }
+            Object.assign(res, this.form_data)
+
+            // set > type format
+            res.type = this.type == 'car' ? 'car' : 'apartment'
+
+
             this.$store.commit('save', res)     // save > to Store
-            axios.post('https://demo-api.vsdev.space/api/brom/sales', res)
+            await axios.post('https://demo-api.vsdev.space/api/brom/sales', res)
+
+            // fetch > ads
+            this.getAds().then(() => {
+                this.sort()
+            })
 
         }
     },
@@ -191,21 +205,30 @@ export default {
                 }
             },
             form_open: false,
-            type: 'car',
+            sort_by_date: false,
 
             form_type: 'type.cars',
-            ads: []
+            type: 'car',
+            ads: [],
+            form_data: {
+
+            }
         }
     },
 
     // [ Hooks ] 
-    async mounted() {
+    async created() {
 
         // fetch > homepage content
         this.content = await api.get('homepage')
-        this.ads     = await api.get('ads')
         this.form    = await api.get('form')
         this.widget  = await api.get('widget')
+        
+        // fetch > ads
+        this.getAds().then(() => {
+            this.sort()
+        })
+
 
     }
 }

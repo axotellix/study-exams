@@ -1111,13 +1111,73 @@ button {
   padding: 15px 25px;
   height: 100%;
 }
-
-.car {
-  background: #7082A6 !important;
+button.center {
+  display: block;
+  margin: 0 auto;
+  -ms-grid-column-align: center;
+      justify-self: center;
+  margin-bottom: 20px;
 }
 
-.apartment {
-  background: #EC865B !important;
+.comments-sort {
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 0 15px;
+  gap: 10px;
+  font-size: 1.4rem;
+  color: #8f9dba;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+  -ms-flex-line-pack: center;
+      align-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.comments-sort div {
+  gap: 10px;
+  font-size: 1.4rem;
+  cursor: pointer;
+  -webkit-transition: all 0.25s;
+  transition: all 0.25s;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -ms-flex-line-pack: center;
+      align-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.comments-sort div:hover {
+  color: #7d8dae;
+}
+.comments-sort div:hover .ico {
+  fill: #b62de7;
+  stroke: #b62de7;
+}
+.comments-sort .ico {
+  width: 22px;
+  height: 22px;
+  fill: #b62de7;
+  stroke: #b62de7;
+  fill: #414A63;
+  stroke: #414A63;
+  stroke-width: 0.5px;
+  cursor: pointer;
+  -webkit-transition: all 0.25s;
+  transition: all 0.25s;
+}
+.comments-sort .ico.desc {
+  -webkit-transform: rotate(-180deg);
+          transform: rotate(-180deg);
 }
 
 .ads-list {
@@ -1149,4 +1209,58 @@ button {
 }
 .ad-card:hover {
   opacity: 0.8;
+}
+
+.card-type {
+  width: 100%;
+  gap: 10px;
+  font-size: 1.6rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -ms-flex-line-pack: center;
+      align-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.card-data {
+  margin-top: 20px;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -ms-flex-line-pack: start;
+      align-content: flex-start;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+}
+
+.ad-card p {
+  font-weight: 700;
+  font-size: 1.5rem;
+  margin-top: 5px;
+  margin-bottom: 0;
+}
+.ad-card p span {
+  font-weight: 400;
+}
+
+.car {
+  background: white !important;
+}
+
+.apartment {
+  background: #e4e7f2 !important;
 }

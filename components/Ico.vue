@@ -19,7 +19,7 @@
     </svg>
 
     <!-- ico: house -->
-    <svg v-if="type == 'house'" class="ico">
+    <svg v-if="type == 'apartment'" class="ico">
         <use xlink:href="/img/icons/sprites.svg#house"></use>
     </svg>
 

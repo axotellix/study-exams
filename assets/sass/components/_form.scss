@@ -38,11 +38,53 @@ form input, form select {
 button {
     @extend .CTA;
     padding: 15px 25px; height: 100%;
+
+    &.center {
+        display: block;
+        margin: 0 auto;
+        justify-self: center;
+        margin-bottom: 20px;
+    }
 }
 
-.car {
-    background: $grey !important;
-}
-.apartment {
-    background: $orange!important;
+.comments-sort {
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 0 15px;
+    gap: 10px;
+    font-size: 1.4rem;
+    color: lighten($grey, 10%);
+    @include flex-align(flex-end);
+
+    div {
+        gap: 10px;
+        font-size: 1.4rem;
+        cursor: pointer;
+        transition: all 0.25s;
+        @include flex-align;
+
+        &:hover {
+            color: lighten($grey, 4%);
+
+            .ico {
+                fill: darken($purple, 10%);
+                stroke: darken($purple, 10%);
+            }
+        }
+    }
+
+    .ico {
+        width: 22px; height: 22px;
+        fill: darken($purple, 10%);
+        stroke: darken($purple, 10%);
+        fill: $d-grey;
+        stroke: $d-grey;
+        stroke-width: 0.5px;
+        cursor: pointer;
+        transition: all 0.25s;
+
+        &.desc {
+            transform: rotate(-180deg);
+        }
+    }
 }
