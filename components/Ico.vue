@@ -18,13 +18,23 @@
         <use xlink:href="/img/icons/sprites.svg#search"></use>
     </svg>
 
+    <!-- ico: house -->
+    <svg v-if="type == 'house'" class="ico">
+        <use xlink:href="/img/icons/sprites.svg#house"></use>
+    </svg>
+
+    <!-- ico: house -->
+    <svg v-if="type == 'car'" class="ico">
+        <use xlink:href="/img/icons/sprites.svg#car"></use>
+    </svg>
+
 </div>
 </template>
 
 <script>
 export default {
     // [ Component name ]
-    name: 'ArticlePage',
+    name: 'Ico',
 
     props: ['type', 'params']
 
