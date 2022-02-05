@@ -1,15 +1,15 @@
 
 // [ STATE ]
 export const state = () => {
-    data: []
+    ads: []
 };
 
 // [ MUTATIONS ]
 export const mutations = {
 
     //@ do > smth
-    func( state, payload ) {
-        state.data = payload
+    save( state, payload ) {
+        state.ads = payload
     }
     
 }

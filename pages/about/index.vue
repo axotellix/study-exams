@@ -1,6 +1,7 @@
+
 <!-- [ PAGE: HOME ] -->
 <template>
-<main class = 'homepage'>
+<main class = 'about'>
 
     <!-- [ section: header ] -->
     <Header />
@@ -13,8 +14,8 @@
 
         <!-- content -->
         <div class="content">
+            <h2>О нас.</h2>
             <ul>
-                <li class = 'img'><img :src="content.image" alt="homepage cover"></li>
                 <li class = 'text' v-html="content.text"></li>
             </ul>
         </div>
@@ -28,26 +29,35 @@
 <!-- [ SCRIPTS ] -->
 <script>
 // [ System ]
-import api from '../api/api.js'
+import api from '@/api/api.js'
+
 // [ Components: Partials ]
 import Header from '@/components/Header'
 import Sidebar from '@/components/Sidebar'
+
 // [ Components: Other ]
 import Ico from '@/components/Ico'
+
+
 export default {
     // [ Component name ]
-    name: 'Home',
+    name: 'About',
+
     // [ Child components ]
     components: {
         // partials
         Header,
         Sidebar,
+
         // other
         Ico
     },
+
     // [ Whatchers ]
     watch: { 
+
     },
+
     // [ Head tags ]
     head() {
         return {
@@ -56,6 +66,7 @@ export default {
             ]
         }
     },
+
     // [ Components props ]
     data() {
         return {
@@ -66,11 +77,14 @@ export default {
             widget: {}
         }
     },
+
     // [ Hooks ] 
     async mounted() {
+
         // fetch > homepage content
         this.content = await api.get('homepage')
         this.widget = await api.get('widget')
+
     }
 }
 </script>

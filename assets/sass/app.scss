@@ -25,9 +25,10 @@
 
 // [ PAGES ]
 @import 'pages/home';
-@import 'pages/article-page';
+@import 'pages/about';
+@import 'pages/ads';
 
 // [ COMPONENTS ]
-@import 'components/article';
-@import 'components/article-comments';
+@import 'components/form';
+@import 'components/ad-card';
 

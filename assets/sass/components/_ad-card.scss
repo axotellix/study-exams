@@ -1,0 +1,19 @@
+
+// [ COMPONENT: ADVERT CARD ]
+.ads-list {
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-top: 50px;
+    @include flex-align(center, flex-start);
+}
+.ad-card {
+    width: 350px; height: 200px;
+    background: $white;
+    border-radius: 7px;
+    padding: 20px;
+    transition: all 0.25s;
+
+    &:hover {
+        opacity: 0.8;
+    }
+}

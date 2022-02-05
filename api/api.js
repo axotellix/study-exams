@@ -14,7 +14,7 @@ const api = {
             homepage:   ctx => "/api/brom/home_page",
             aboutpage:  ctx => "/api/brom/about_page",
             ads:        ctx => "/api/brom/sales",
-            form:       ctx => " /api/brom/sales/form",
+            form:       ctx => "/api/brom/sales/form",
         },
 
         // [ POST requests ]

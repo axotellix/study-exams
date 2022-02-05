@@ -6,9 +6,9 @@
     <!-- nav -->
     <div class="nav">
         <ul>
-            <li class = 'navlink'><router-link to='/'>Главная</router-link></li>
-            <li class = 'navlink'><router-link to='/ads'>Объявления</router-link></li>
-            <li class = 'navlink'><router-link to='/about'>О нас</router-link></li>
+            <li class = 'navlink'><nuxt-link to='/'>Главная</nuxt-link></li>
+            <li class = 'navlink'><nuxt-link to='/ads'>Объявления</nuxt-link></li>
+            <li class = 'navlink'><nuxt-link to='/about'>О нас</nuxt-link></li>
         </ul>
     </div>
 
