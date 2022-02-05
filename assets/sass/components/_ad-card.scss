@@ -23,6 +23,10 @@
     gap: 10px;
     font-size: 1.6rem;
     @include flex-align;
+
+    .ico {
+        fill: $d-grey !important;
+    }
 }
 
 .card-data {

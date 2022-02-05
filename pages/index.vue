@@ -52,7 +52,10 @@ export default {
     head() {
         return {
             link: [
-                { rel: "stylesheet", href: "/css/app.css" } //TODO: add fonts
+                { rel: "stylesheet", href: "/css/app.css" },
+                { rel: "preconnect", href: "https://fonts.googleapis.com" },
+                { rel: "preconnect", href: "https://fonts.gstatic.com" },
+                { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700&display=swap" },
             ]
         }
     },
